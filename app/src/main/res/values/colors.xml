@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="capcut_cyan">#0FE3C1</color>
+    <color name="capcut_blue">#007AFF</color>
+    <color name="surface_dark">#121212</color>
+    <color name="surface_card">#1E1E1E</color>
+    <color name="border_zinc">#27272A</color>
+</resources>
