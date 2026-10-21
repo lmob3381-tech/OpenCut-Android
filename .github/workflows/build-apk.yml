@@ -51,12 +51,17 @@ jobs:
       - name: Organize APK Artifacts
         run: |
           mkdir -p output-apks
-          # Copy Debug & Release APKs with clean descriptive names
-          cp app/build/outputs/apk/release/*-armeabi-v7a-*.apk output-apks/OpenCut-32bit-armeabi-v7a.apk || true
-          cp app/build/outputs/apk/release/*-arm64-v8a-*.apk output-apks/OpenCut-64bit-arm64-v8a.apk || true
-          cp app/build/outputs/apk/release/*-universal-*.apk output-apks/OpenCut-Universal.apk || true
-          cp app/build/outputs/apk/debug/*-universal-*.apk output-apks/OpenCut-Debug-Universal.apk || true
+          # Find and copy APKs flexibly
+          find app/build/outputs/apk/ -type f -name "*.apk" -exec cp {} output-apks/ \;
           ls -la output-apks/
+          
+          # Create clean branded symlinks/copies
+          find output-apks/ -name "*armeabi-v7a*.apk" -exec cp {} output-apks/OpenCut-32bit-armeabi-v7a.apk \; 2>/dev/null || true
+          find output-apks/ -name "*arm64-v8a*.apk" -exec cp {} output-apks/OpenCut-64bit-arm64-v8a.apk \; 2>/dev/null || true
+          find output-apks/ -name "*universal*.apk" -exec cp {} output-apks/OpenCut-Universal.apk \; 2>/dev/null || true
+          
+          echo "=== Final APKs in output-apks ==="
+          ls -lh output-apks/
 
       - name: Upload APKs as GitHub Artifact
         uses: actions/upload-artifact@v4
