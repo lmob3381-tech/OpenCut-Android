@@ -16,6 +16,8 @@ jobs:
   build:
     name: Build APKs
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -52,11 +54,10 @@ jobs:
       - name: Organize APK Artifacts
         run: |
           mkdir -p output-apks
-          # Find and copy APKs flexibly
-          find app/build/outputs/apk/ -type f -name "*.apk" -exec cp {} output-apks/ \;
-          ls -la output-apks/
+          # Copy release APKs
+          find app/build/outputs/apk/release -type f -name "*.apk" -exec cp {} output-apks/ \;
           
-          # Create clean branded symlinks/copies
+          # Create clean branded APK names
           find output-apks/ -name "*armeabi-v7a*.apk" -exec cp {} output-apks/OpenCut-32bit-armeabi-v7a.apk \; 2>/dev/null || true
           find output-apks/ -name "*arm64-v8a*.apk" -exec cp {} output-apks/OpenCut-64bit-arm64-v8a.apk \; 2>/dev/null || true
           find output-apks/ -name "*universal*.apk" -exec cp {} output-apks/OpenCut-Universal.apk \; 2>/dev/null || true
