@@ -18,7 +18,7 @@ import app.opencut.ui.components.TimecodeControlBar
 import app.opencut.ui.components.TimelineView
 import app.opencut.ui.components.TopNavBar
 import app.opencut.ui.components.VideoPreviewSurface
-import app.opencut.ui.components.sheets.ActiveSheet
+import app.opencut.viewmodel.ActiveSheet
 import app.opencut.ui.components.sheets.AspectRatioSheet
 import app.opencut.ui.components.sheets.ExportDialog
 import app.opencut.ui.components.sheets.FilterSheet
